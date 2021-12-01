@@ -5,12 +5,17 @@ import os
 filename = os.path.join("input.txt")
 
 with open(filename) as f:
-    input = f.read().splitlines()
+    input = [int(i) for i in f.readlines()]
 
 # %%
-count = 0
-for i in range(1,len(input)):
-    if input[i]>input[i-1]:
-        count += 1
-
-print(count)
+def bigger(input):
+    return sum(x<y for x, y in zip(input,input[1:]))
+# %%
+def rolling_sum(input):
+    A = [sum(x) for x in zip(input,input[1:],input[2:])]
+    return bigger(A)
+# %%
+if __name__=='__main__':
+    print(bigger(input))
+    print(rolling_sum(input))
+# %%
