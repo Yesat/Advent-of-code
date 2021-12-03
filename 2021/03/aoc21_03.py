@@ -79,7 +79,7 @@ if __name__=='__main__':
 
     input = np.genfromtxt(filename,dtype=str)
 
-    print('power consumption:',gammaXepsilon(input))
+    print('power consumption:',power_consumption(input))
     print('life support:', life_support(input))
 
 # %%
