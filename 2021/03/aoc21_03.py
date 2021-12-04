@@ -1,6 +1,7 @@
 # %% 
 import os
 import numpy as np
+from time import perf_counter as perf
 
 
 # %%
@@ -63,7 +64,6 @@ def O2(input=input):
                 v = 0
             else:
                 v = min_element(x)
-                print(v)
             M = np.delete(M,np.where(x==v),axis=0)
             i +=1
     r =''
@@ -76,10 +76,14 @@ def life_support(input=input):
 # %%
 if __name__=='__main__':
     filename = os.path.join("input.txt")
-
+    start = perf()
     input = np.genfromtxt(filename,dtype=str)
-
+    import_ts = perf()
     print('power consumption:',power_consumption(input))
+    step1_ts = perf()
     print('life support:', life_support(input))
+    step2_ts = perf()
+
+    print(f'Total Time: {step2_ts-start}; import {import_ts-start}; step 1: {step1_ts-import_ts}; step 2 {step2_ts-step1_ts}')
 
 # %%
