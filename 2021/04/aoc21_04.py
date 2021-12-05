@@ -20,7 +20,7 @@ def test_win(drew,linesW=linesW):
             return False
 
 # %%
-def bingo(boards=boards,linesW=linesW):
+def bingo(boards=boards,linesW=linesW,input=input):
     x = {b:set() for b in boards}
     win = False
     for v in input:
@@ -31,11 +31,13 @@ def bingo(boards=boards,linesW=linesW):
             win = test_win(x[b],linesW)
         if win:
             break
-    return(b,x[b],v)
+    return(boards[b],x[b],v)
 
 def results(board,x,v):
     board_f = [val for sub in board for val in sub]
+    
     picked = [board[y[0]][y[1]] for y in x]
+    print(board_f)
     return((sum(board_f)-sum(picked))*v)
 
 
@@ -45,3 +47,18 @@ lines[0]
 list(map(int,lines[0].split(',')))
 
 # %%
+with open("input.txt", "r") as file:
+    contents = file.read()
+    sections = contents.split("\n\n")
+    input = [int(num) for num in sections[0].split(",")]
+    boards_raw = sections[1:]
+    boards = {}
+    for i,board_raw in enumerate(boards_raw):
+        rows_raw = board_raw.split("\n")
+        board = []
+        for row_raw in rows_raw:
+            row = [int(num) for num in row_raw.split()]
+            board.append(row)
+        boards[i]=board
+
+
